@@ -1,14 +1,12 @@
 # Traveling Salesman Problem:
 
-If Traveling Salesman Problem (TSP) consists of five cities (A, B, C, D, E). 
-
-The goal is to find the shortest possible route that visits every city once and returns to the origin city A. The route should be a closed loop.
+If the Traveling Salesman Problem (TSP) consists of five cities (A, B, C, D, E), the goal is to find the shortest possible route that the salesman visits every city once and returns to the origin city, A in this case. The route should be a closed loop.
 
 Given the list of cities and their coordinates, the problem is to find the route with the minimum total distance. The actual solution will depend on the method used to solve the TSP.
 
-One common approach is to use a greedy algorithm, which always goes to the nearest unvisited city next. However, the greedy approach doesn't always yield the optimal solution. To find the true optimal solution, we would have to enumerate all possible routes and calculate their lengths, which becomes computationally intensive for a large number of cities.
+One common approach is to use a greedy algorithm, which always goes to the nearest unvisited city next. However, the greedy approach doesn't always yield the optimal solution. To find the true optimal solution, we would have to enumerate all possible routes and calculate their lengths, which becomes computationally intensive for a large number of cities. Hence two versions of the code are implemented, single-process and multi-processes.
 
-Here's how the routing would work with a simple greedy approach:
+In the algorithm, the routing would work with a simple greedy approach as follow;
 
 	1. Start from city 'A'. (Current route: A)
 	2. Move to the closest unvisited city from 'A', which is 'B'. (Current route: A-B)
@@ -24,7 +22,7 @@ This is just a simplified example. The actual optimal route might be different. 
 
 	1. Install the required python packages.
 	2. Clone the TSP repository from GitHub.
-	3. Change directory to the cloned repository.
+	3. Change the directory to the cloned repository.
 	4. Run `python tsp.py` first, and then,
 	5. Run `python tsp.py --visualise` to visualise the routing process.
 
