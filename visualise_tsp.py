@@ -1,8 +1,17 @@
+import os
+os.environ['MPLCONFIGDIR'] = os.getcwd() + "/configs/"
+import numpy as np
+import matplotlib
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
+from PIL import Image
 
 def visualise_tsp(best_route, cities, sleep_time=0.1):
-    fig, ax = plt.subplots()
+    # Create a "results" directory if it doesn't exist
+    if not os.path.exists("results"):
+        os.makedirs("results")
+
+    fig, ax = plt.subplots(figsize=(8, 6))
 
     def update_plot(iteration):
         ax.clear()
@@ -33,6 +42,27 @@ def visualise_tsp(best_route, cities, sleep_time=0.1):
 
     num_iterations = len(best_route) - 1
 
-    ani = animation.FuncAnimation(fig, update_plot, frames=num_iterations, interval=int(sleep_time*5000), repeat=False)
+    # Create a list to store individual frames of the animation
+    frames = []
 
-    plt.show()
+    for i in range(num_iterations):
+        update_plot(i)
+        # Draw the canvas to generate the frame
+        fig.canvas.draw()
+        # Convert the frame to an RGB array
+        frame = np.array(fig.canvas.renderer._renderer)
+        # Convert the RGB array to an image
+        image = Image.fromarray(frame)
+        # Append the image to the list of frames
+        frames.append(image)
+
+    # Save the frames as a GIF using Pillow
+    frames[0].save("results/tsp_animation.gif", 
+        format="GIF", 
+        append_images=frames[1:], 
+        save_all=True, 
+        duration=int(sleep_time*5000), 
+        loop=0,
+        blit=True)
+
+    plt.close(fig)

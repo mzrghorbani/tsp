@@ -1,6 +1,6 @@
 import json
 import math
-import argparse
+import sys
 from mpi4py import MPI
 from visualise_tsp import visualise_tsp
 
@@ -73,10 +73,10 @@ def load_input():
 
 
 def main():
-    # Parse command line arguments
-    parser = argparse.ArgumentParser(description='TSP Solver')
-    parser.add_argument('--visualise', action='store_true', help='Visualise the TSP route')
-    args = parser.parse_args()
+    if len(sys.argv) > 1:
+        visualise = sys.argv[1].lower() == "true"
+    else:
+        visualise = False
 
     # Initialize MPI
     comm = MPI.COMM_WORLD
@@ -130,10 +130,10 @@ def main():
         save_result(result)
 
         # Visualize the result if the "--visualise" flag is provided
-        if args.visualise:
+        if visualise:
             visualise_tsp(optimal_path, cities)
         else:
-            print("To visualize the routing process, run 'mpirun -np <num_processes> python run_par.py --visualise'")
+            print("To visualize the routing process, run run_par.py with the 'true' argument.")
 
     # Terminate MPI
     MPI.Finalize()

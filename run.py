@@ -1,6 +1,6 @@
 import json
 import math
-import argparse
+import sys
 from visualise_tsp import visualise_tsp
 
 def calculate_distance(city1, city2):
@@ -73,10 +73,10 @@ def load_input():
 
 
 def main():
-    # Parse command line arguments
-    parser = argparse.ArgumentParser(description='TSP Solver')
-    parser.add_argument('--visualise', action='store_true', help='Visualise the TSP route')
-    args = parser.parse_args()
+    if len(sys.argv) > 1:
+        visualise = sys.argv[1].lower() == "true"
+    else:
+        visualise = False
 
     cities = load_input()
     optimal_path, min_distance = solve_tsp(cities)
@@ -91,10 +91,10 @@ def main():
     save_result(result)
 
     # Visualize the result if the "--visualise" flag is provided
-    if args.visualise:
+    if visualise:
         visualise_tsp(optimal_path, cities)
     else:
-        print("To visualise the routing process, run run.py with the --visualise argument.")
+        print("To visualize the routing process, run run.py with the 'true' argument.")
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
