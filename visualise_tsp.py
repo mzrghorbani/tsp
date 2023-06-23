@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 import matplotlib.animation as animation
 from PIL import Image
 
-def visualise_tsp(best_route, cities, sleep_time=0.1):
+def visualise_tsp(best_route, cities, sleep_time=0.5):
     # Create a "results" directory if it doesn't exist
     if not os.path.exists("results"):
         os.makedirs("results")
@@ -61,7 +61,7 @@ def visualise_tsp(best_route, cities, sleep_time=0.1):
         format="GIF", 
         append_images=frames[1:], 
         save_all=True, 
-        duration=int(sleep_time*5000), 
+        duration=int(sleep_time*1000), 
         loop=0,
         blit=True)
 

@@ -24,7 +24,7 @@ This is just a simplified example. The actual optimal route might be different. 
 	2. Clone the TSP repository from GitHub.
 	3. Change the directory to the cloned repository.
 	4. Run `python tsp.py` first, and then,
-	5. Run `python tsp.py true` to visualise the routing process.
+	5. Run `python tsp.py visualise` to visualise the routing process.
 
 
 # Instructions (with-mpi):
@@ -33,7 +33,7 @@ This is just a simplified example. The actual optimal route might be different. 
 	2. Clone the TSP repository from GitHub.
 	3. Change directory to the cloned repository.
 	4. Run `mpirun -np 2 python tsp.py` first, and then,
-	5. Run `mpirun -np 2 python tsp.py true` to visualise the routing process.
+	5. Run `mpirun -np 2 python tsp.py visualise` to visualise the routing process.
 
 
 # Results:

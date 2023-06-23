@@ -74,9 +74,11 @@ def load_input():
 
 def main():
     if len(sys.argv) > 1:
-        visualise = sys.argv[1].lower() == "true"
+        visualise = sys.argv[1].lower() == "visualise"
     else:
         visualise = False
+
+    print(visualise)
 
     cities = load_input()
     optimal_path, min_distance = solve_tsp(cities)
@@ -90,11 +92,11 @@ def main():
     # Save result
     save_result(result)
 
-    # Visualize the result if the "--visualise" flag is provided
+    # Visualise the result if the "visualise" flag is provided
     if visualise:
         visualise_tsp(optimal_path, cities)
     else:
-        print("To visualize the routing process, run run.py with the 'true' argument.")
+        print("To visualise the routing process, run run.py with the 'visualise' argument.")
 
 if __name__ == "__main__":
     main()
