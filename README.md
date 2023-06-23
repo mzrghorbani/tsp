@@ -38,7 +38,7 @@ This is just a simplified example. The actual optimal route might be different. 
 
 # Results:
 
-    If the visualisation option is not passed, a route.geojson will be created in the output_files/ directory.
-    If the visualisation option is passed, a GIF image will be created in the results/ directory.
-
+    * If the visualisation option is not passed, a route.geojson will be created in the output_files/ directory.
+    * If the visualisation option is passed, a GIF image will be created in the results/ directory.
+    * Display gif image with 'gifview -a results/tsp_animation.gif' or similar gif view utilities.
 
