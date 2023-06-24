@@ -1,6 +1,7 @@
 import json
 import math
 import sys
+import os
 from mpi4py import MPI
 from visualise_tsp import visualise_tsp
 
@@ -55,28 +56,32 @@ def solve_tsp(cities):
     return optimal_path, min_distance
 
 
-def save_result(result):
+def save_result(result, output_dir):
     print("Saving result...")
-    with open('output_files/result.json', 'w') as f:
+    output_file = os.path.join(output_dir, 'result.json')
+    with open(output_file, 'w') as f:
         # Append total_distance to the best_route list
         result['best_route'].append({'total_distance': result['min_distance']})
         json.dump(result['best_route'], f, indent=2)  # pretty-print JSON data
     print("Result saved.")
 
 
-def load_input():
+def load_input(input_dir):
     print("Loading input...")
-    with open('input_files/cities.json', 'r') as f:
+    input_file = os.path.join(input_dir, 'cities.json')
+    with open(input_file, 'r') as f:
         cities = json.load(f)
     print("Input loaded.")
     return cities
 
 
 def main():
-    if len(sys.argv) > 1:
-        visualise = sys.argv[1].lower() == "visualise"
-    else:
-        visualise = False
+    if len(sys.argv) != 3:
+        print("Usage: mpirun -np <num_processes> python3 run_par.py <input_dir> <output_dir>")
+        return
+
+    input_dir = sys.argv[1].lower()
+    output_dir = sys.argv[2].lower()
 
     # Initialize MPI
     comm = MPI.COMM_WORLD
@@ -86,7 +91,7 @@ def main():
     # Load input
     cities = None
     if rank == 0:
-        cities = load_input()
+        cities = load_input(input_dir)
 
     # Broadcast cities to all processes
     cities = comm.bcast(cities, root=0)
@@ -127,13 +132,10 @@ def main():
         }
 
         # Save result
-        save_result(result)
+        save_result(result, output_dir)
 
         # Visualise the result if the "visualise" flag is provided
-        if visualise:
-            visualise_tsp(optimal_path, cities)
-        else:
-            print("To visualise the routing process, run run_par.py with the 'visualise' argument.")
+        visualise_tsp(optimal_path, cities)
 
     # Terminate MPI
     MPI.Finalize()

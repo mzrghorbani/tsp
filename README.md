@@ -1,4 +1,4 @@
-# Traveling Salesman Problem:
+## Traveling Salesman Problem:
 
 If the Traveling Salesman Problem (TSP) consists of five cities (A, B, C, D, E), the goal is to find the shortest possible route that the salesman visits every city once and returns to the origin city, A in this case. The route should be a closed loop.
 
@@ -18,27 +18,22 @@ In the algorithm, the routing would work with a simple greedy approach as follow
 This is just a simplified example. The actual optimal route might be different. We would need to run the TSP algorithm on the provided cities to find the actual optimal route.
 
 
-# Instructions (non-mpi):
+## Instructions (non-mpi):
 
 	1. Install the required python packages.
-	2. Clone the TSP repository from GitHub.
+	2. Clone the TSP repository from GitHub https://github.com/mzrghorbani/tsp.git
 	3. Change the directory to the cloned repository.
-	4. Run `python tsp.py` first, and then,
-	5. Run `python tsp.py visualise` to visualise the routing process.
+	4. Run `python3 run.py <input_dir> <output_dir>`.
 
 
-# Instructions (with-mpi):
+## Instructions (with-mpi):
 
 	1. Install the required python packages including mpirun.
 	2. Clone the TSP repository from GitHub.
 	3. Change directory to the cloned repository.
-	4. Run `mpirun -np 2 python tsp.py` first, and then,
-	5. Run `mpirun -np 2 python tsp.py visualise` to visualise the routing process.
+	4. Run `mpirun -np <num_proc> python3 run_par.py <input_dir> <output_dir>`.
 
 
-# Results:
+## Results:
 
-    * If the visualisation option is not passed, a route.geojson will be created in the output_files/ directory.
-    * If the visualisation option is passed, a GIF image will be created in the results/ directory.
-    * Display gif image with 'gifview -a results/tsp_animation.gif' or similar gif view utilities.
-
+    The results are strored in the specified output-directory in form of .geojson and .gif format.

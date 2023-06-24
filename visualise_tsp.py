@@ -7,10 +7,6 @@ import matplotlib.animation as animation
 from PIL import Image
 
 def visualise_tsp(best_route, cities, sleep_time=0.5):
-    # Create a "results" directory if it doesn't exist
-    if not os.path.exists("results"):
-        os.makedirs("results")
-
     fig, ax = plt.subplots(figsize=(8, 6))
 
     def update_plot(iteration):
@@ -57,7 +53,7 @@ def visualise_tsp(best_route, cities, sleep_time=0.5):
         frames.append(image)
 
     # Save the frames as a GIF using Pillow
-    frames[0].save("results/tsp_animation.gif", 
+    frames[0].save("output_files/tsp_animation.gif", 
         format="GIF", 
         append_images=frames[1:], 
         save_all=True, 
